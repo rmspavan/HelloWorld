@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+    environment {
+        PATH = "/opt/maven/bin/:$PATH"
+    }
+    stages {
+        stage('scm') {
+            steps {
+                git branch: 'main', credentialsId: 'github', url: 'https://github.com/rmspavan/HelloWorld.git'
+            }
+        }
+        stage('build') {
+            steps {
+                sh "mvn clean install"
+            }
+        }
+        stage('deploy') {
+            steps {
+                sshagent(['deploy_user']){
+                    sh "scp -o StrictHostKeyChecking=no webapp/target/webapp.war root@10.170.1.10:/opt/tomcat/webapps/"
+                  }
+                }
+            }
+        }
+    }
