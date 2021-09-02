@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent docker
     environment {
         PATH = "/opt/maven/bin/:$PATH"
     }
@@ -17,7 +17,7 @@ pipeline {
         stage('deploy') {
             steps {
                 sshagent(['deploy_user']){
-                    sh "scp -o StrictHostKeyChecking=no webapp/target/webapp.war root@10.170.1.10:/opt/tomcat/webapps/"
+                    sh "scp -o StrictHostKeyChecking=no webapp/target/webapp.war root@192.168.1.235:/opt/tomcat/webapps/"
                   }
                 }
             }
