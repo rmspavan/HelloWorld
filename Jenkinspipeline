@@ -1,8 +1,8 @@
 pipeline {
     agent any
-    environment {
-        PATH = "M2_HOME"
-    }
+    tools {
+      maven 'M2_HOME'
+          }
     stages {
         stage('scm') {
             steps {
@@ -11,7 +11,7 @@ pipeline {
         }
         stage('build') {
             steps {
-                sh "mvn clean install"
+                sh "mvn clean package"
             }
         }
         /* stage('deploy') {
