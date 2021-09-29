@@ -17,12 +17,17 @@ pipeline {
                 sh "mvn clean package"
             }
         }
-        stage('deploy') {
+        stage('Copy war') {
             steps {
                 sshagent(['sshkey']){
                     sh "scp -o StrictHostKeyChecking=no webapp/target/webapp.war root@192.168.1.245:/usr/share/tomcat/webapps"
                   }
                 }
             }
+        stage('Deploy') {       
+            steps {
+                  echo 'Deployed Successfully'             
+                  }
+            }     
         }
     }
