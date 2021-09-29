@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('scm') {
             steps {
-                git branch: 'main', credentialsId: 'github', url: 'https://github.com/rmspavan/HelloWorld.git'
+                git branch: 'main', credentialsId: 'git', url: 'https://github.com/rmspavan/HelloWorld.git'
             }
         }
         stage('build') {
