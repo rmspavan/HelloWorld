@@ -13,7 +13,7 @@ pipeline {
                 url: 'https://github.com/rmspavan/HelloWorld.git'
             }
         }
-        /* stage('build') {
+        stage('build') {
             steps {
                 sh "mvn clean package"
             }
@@ -21,9 +21,10 @@ pipeline {
         stage('Deploy') {
             steps {
                 sshagent(['sshkey']){
-                    sh "scp -o StrictHostKeyChecking=no webapp/target/webapp.war root@192.168.1.245:/usr/share/tomcat/webapps"
+                    sh "scp -o StrictHostKeyChecking=no webapp/target/webapp.war 
+                    root@192.168.1.245:/usr/share/tomcat/webapps"
                   }
                 }
-            }  */      
+            }       
         }
     }
